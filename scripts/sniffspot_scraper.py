@@ -27,8 +27,9 @@ class SniffspotScraper:
         self.base_url = "https://www.sniffspot.com"
         self.headers = {
             "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/91.0.4472.124 Safari/537.36"
             )
         }
         self.output_dir = "data"
@@ -43,10 +44,8 @@ class SniffspotScraper:
         spots = []
         page = 1
         while True:
-            url = (
-                f"{self.base_url}/spots/search?"
-                f"q=Ontario%2C+Canada&page={page}"
-            )
+            url_params = f"q=Ontario%2C+Canada&page={page}"
+            url = f"{self.base_url}/spots/search?{url_params}"
             response = requests.get(url, headers=self.headers)
             if response.status_code != 200:
                 break
@@ -79,19 +78,19 @@ class SniffspotScraper:
         Returns:
             Dict[str, Any]: Dictionary with parsed spot information.
         """
+        rating_div = listing.find("div", class_="rating")
+        rating = rating_div.text.strip() if rating_div else None
+
+        features = []
+        for feature in listing.find_all("div", class_="feature"):
+            features.append(feature.text.strip())
+
         return {
             "title": listing.find("h3").text.strip(),
             "price": listing.find("div", class_="price").text.strip(),
             "location": listing.find("div", class_="location").text.strip(),
-            "rating": (
-                listing.find("div", class_="rating").text.strip()
-                if listing.find("div", class_="rating")
-                else None
-            ),
-            "features": [
-                feature.text.strip()
-                for feature in listing.find_all("div", class_="feature")
-            ],
+            "rating": rating,
+            "features": features,
             "url": self.base_url + listing.find("a")["href"],
         }
 
@@ -109,20 +108,25 @@ class SniffspotScraper:
             return {}
 
         soup = BeautifulSoup(response.text, "html.parser")
+        description = soup.find("div", class_="description").text.strip()
+
+        amenities = []
+        for amenity in soup.find_all("div", class_="amenity"):
+            amenities.append(amenity.text.strip())
+
+        rules = []
+        for rule in soup.find_all("div", class_="rule"):
+            rules.append(rule.text.strip())
+
+        photos = []
+        for img in soup.find_all("img", class_="spot-photo"):
+            photos.append(img["src"])
+
         return {
-            "description": soup.find("div", class_="description").text.strip(),
-            "amenities": [
-                amenity.text.strip()
-                for amenity in soup.find_all("div", class_="amenity")
-            ],
-            "rules": [
-                rule.text.strip()
-                for rule in soup.find_all("div", class_="rule")
-            ],
-            "photos": [
-                img["src"]
-                for img in soup.find_all("img", class_="spot-photo")
-            ],
+            "description": description,
+            "amenities": amenities,
+            "rules": rules,
+            "photos": photos,
             "host_info": self._parse_host_info(soup),
         }
 
@@ -135,14 +139,13 @@ class SniffspotScraper:
         Returns:
             Dict[str, Any]: Dictionary with host information.
         """
+        response_div = soup.find("div", class_="response-rate")
+        response_rate = response_div.text.strip() if response_div else None
+
         return {
             "name": soup.find("div", class_="host-name").text.strip(),
             "joined": soup.find("div", class_="host-joined").text.strip(),
-            "response_rate": (
-                soup.find("div", class_="response-rate").text.strip()
-                if soup.find("div", class_="response-rate")
-                else None
-            ),
+            "response_rate": response_rate,
         }
 
     def save_data(self, data: List[Dict[str, Any]], filename: str) -> None:

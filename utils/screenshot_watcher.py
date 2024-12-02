@@ -93,10 +93,8 @@ def convert_to_base64(image_path: str, output_path: str) -> bool:
             with open(output_path, "w") as f:
                 f.write(img_str)
 
-            print(
-                "Successfully converted {} to base64 and saved to {}"
-                .format(image_path, output_path)
-            )
+            msg = "Successfully converted {} to base64 and saved to {}"
+            print(msg.format(image_path, output_path))
             return True
     except Exception as e:
         print(f"Error converting image to base64: {str(e)}")
@@ -128,7 +126,7 @@ class ScreenshotHandler(FileSystemEventHandler):
             return
 
         try:
-            # Wait a brief moment to ensure the file is completely written
+            # Wait a brief moment to ensure file is completely written
             time.sleep(1)
 
             # Copy original to workspace
@@ -143,8 +141,8 @@ class ScreenshotHandler(FileSystemEventHandler):
 
             # Convert to base64 text (using JPEG version if available)
             txt_path = os.path.join(WORKSPACE_DIR, f"{base_name}.txt")
-            source_for_base64 = jpeg_path if ext.lower() == ".png" else filepath
-            if convert_to_base64(source_for_base64, txt_path):
+            source = jpeg_path if ext.lower() == ".png" else filepath
+            if convert_to_base64(source, txt_path):
                 # Move original to processed folder
                 processed_path = os.path.join(PROCESSED_DIR, filename)
                 shutil.move(filepath, processed_path)
@@ -162,7 +160,8 @@ def main() -> None:
     observer.schedule(event_handler, SCREENSHOTS_DIR, recursive=False)
     observer.start()
 
-    print(f"Watching for screenshots in {SCREENSHOTS_DIR}")
+    msg = "Watching for screenshots in {}"
+    print(msg.format(SCREENSHOTS_DIR))
     print("Press Ctrl+C to stop")
 
     try:

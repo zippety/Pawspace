@@ -39,10 +39,8 @@ def convert_image_to_base64(input_path: str, output_path: str) -> None:
             with open(output_path, "w") as f:
                 f.write(img_str)
 
-            print(
-                "Successfully converted {} to base64 and saved to {}"
-                .format(input_path, output_path)
-            )
+            msg = "Successfully converted {} to base64 and saved to {}"
+            print(msg.format(input_path, output_path))
 
     except Exception as e:
         print(f"Error converting image: {str(e)}")
@@ -72,10 +70,11 @@ def _convert_to_rgb(img: Image.Image) -> Image.Image:
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print(
+        msg = (
             "Usage: python image_converter.py "
             "<input_image_path> <output_text_path>"
         )
+        print(msg)
         sys.exit(1)
 
     input_path = sys.argv[1]

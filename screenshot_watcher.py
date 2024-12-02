@@ -9,6 +9,7 @@ import os
 import time
 from pathlib import Path
 from typing import Optional
+
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
@@ -49,10 +50,10 @@ class ScreenshotHandler(FileSystemEventHandler):
         Returns:
             bool: True if the file is a screenshot, False otherwise.
         """
-        screenshot_extensions = {'.png', '.jpg', '.jpeg'}
+        screenshot_extensions = {".png", ".jpg", ".jpeg"}
         return (
             file_path.suffix.lower() in screenshot_extensions
-            and 'screenshot' in file_path.name.lower()
+            and "screenshot" in file_path.name.lower()
         )
 
     def _process_screenshot(self, file_path: Path) -> Optional[Path]:
