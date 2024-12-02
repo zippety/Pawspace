@@ -14,6 +14,10 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@react-google-maps/api": "^2.20.3",
+    "@sentry/browser": "^7.86.0",
+    "@sentry/react": "^7.86.0",
+    "@sentry/replay": "^7.86.0",
+    "@sentry/tracing": "^7.86.0",
     "@supabase/supabase-js": "^2.46.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
