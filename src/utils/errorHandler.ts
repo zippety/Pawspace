@@ -1,4 +1,5 @@
 import { captureException } from '@sentry/react';
+import React from 'react';
 
 export interface ErrorContext {
   component: string;
@@ -25,59 +26,38 @@ export class ErrorHandler {
   }
 
   handleError(error: Error, context: ErrorContext): void {
-    // Log the error
     this.logError(error, context);
-
-    // Send to error tracking service
     this.reportError(error, context);
-
-    // Handle specific error types
-    if (error instanceof TypeError) {
-      console.warn('Type error occurred:', error.message);
-    } else if (error.name === 'NetworkError') {
-      // Handle network errors
-      this.handleNetworkError(error);
-    }
   }
 
   private logError(error: Error, context: ErrorContext): void {
     const errorEntry = {
       timestamp: new Date(),
       error,
-      context
+      context,
     };
-
     this.errorLog.push(errorEntry);
-
-    // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error in component:', context.component);
-      console.error('Action:', context.action);
-      console.error('Error:', error);
-      console.error('Stack:', error.stack);
-    }
+    console.error('Error:', error);
+    console.error('Context:', context);
   }
 
   private reportError(error: Error, context: ErrorContext): void {
-    // Send to Sentry
     captureException(error, {
-      tags: {
-        component: context.component,
-        action: context.action
-      },
-      extra: {
-        ...context.metadata,
-        userId: context.userId
-      }
+      extra: context,
     });
   }
 
-  private handleNetworkError(error: Error): void {
-    // Implement retry logic for network errors
-    // TODO: Add exponential backoff retry mechanism
+  handleNetworkError(error: Error): void {
+    this.handleError(error, {
+      component: 'NetworkLayer',
+      action: 'apiRequest',
+      metadata: {
+        message: error.message,
+        stack: error.stack,
+      },
+    });
   }
 
-  // Get recent errors for debugging
   getRecentErrors(limit: number = 10): Array<{
     timestamp: Date;
     error: Error;
@@ -86,7 +66,6 @@ export class ErrorHandler {
     return this.errorLog.slice(-limit);
   }
 
-  // Clear error log
   clearErrorLog(): void {
     this.errorLog = [];
   }
@@ -103,7 +82,7 @@ export function withErrorBoundary<P extends object>(
       this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError(error: Error): { hasError: boolean } {
+    static getDerivedStateFromError(): { hasError: boolean } {
       return { hasError: true };
     }
 
@@ -111,7 +90,7 @@ export function withErrorBoundary<P extends object>(
       ErrorHandler.getInstance().handleError(error, {
         component: componentName,
         action: 'render',
-        metadata: { errorInfo }
+        metadata: { errorInfo },
       });
     }
 
@@ -137,9 +116,9 @@ export function useErrorHandler(component: string) {
       ErrorHandler.getInstance().handleError(error, {
         component,
         action,
-        metadata
+        metadata,
       });
-    }
+    },
   };
 }
 
