@@ -16,8 +16,15 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["vite/client", "node"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowJs": false,
+    "incremental": true
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "scripts", "utils"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
