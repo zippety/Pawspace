@@ -1,73 +1,68 @@
-# 🐾 PawSpace - Sniffspot Data Collection
+# 🐾 Pawspace
 
-PawSpace is a Python-based project that scrapes and processes data from Sniffspot listings in Ontario. It automates the collection of pet-friendly space information to help analyze and understand the market better.
+## Overview
+Pawspace is a dual-purpose project consisting of:
+1. A data collection system for Sniffspot listings in Ontario
+2. A web application for visualizing and analyzing the collected data
+
+## 📁 Project Structure
+```
+pawspace/
+├── src/                  # Frontend React/TypeScript application
+│   ├── components/      # Reusable UI components
+│   ├── pages/          # Page components and routing
+│   ├── utils/          # Utility functions and helpers
+│   └── styles/         # Global styles and themes
+├── scripts/             # Python data collection scripts
+│   ├── sniffspot_scraper.py
+│   └── image_converter.py
+├── utils/               # Python utility scripts
+└── data/               # Data storage (gitignored)
+```
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.8+
-- Chrome WebDriver for Selenium
-- Required Python packages (see requirements.txt)
-
-### Installation
+### Frontend Development
 ```bash
-# Clone the repository
-git clone https://github.com/zippety/Pawspace.git
-cd Pawspace
-
 # Install dependencies
-pip install -r requirements.txt
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-## 📁 Project Structure
+### Data Collection Scripts
+```bash
+# Install Python dependencies
+pip install -r scripts/requirements.txt
 
-```
-pawspace/
-├── scripts/              # Main scraping scripts
-│   ├── sniffspot_scraper.py    # Main scraping logic
-│   └── image_converter.py      # Image processing utilities
-├── utils/               # Utility functions
-│   └── screenshot_watcher.py   # Screenshot monitoring
-├── data/               # Scraped data storage
-└── requirements.txt    # Python dependencies
-```
-
-## 🛠️ Main Components
-
-1. **Sniffspot Scraper**
-   - Automates data collection from Sniffspot listings
-   - Handles pagination and data extraction
-   - Stores results in structured format
-
-2. **Image Processing**
-   - Converts and processes listing images
-   - Handles screenshot monitoring and conversion
-
-3. **Data Collection**
-   - Focuses on Ontario region listings
-   - Captures key listing information
-   - Stores data for analysis
-
-## 📝 Usage
-
-1. **Running the Scraper**
-```python
+# Run the scraper
 python scripts/sniffspot_scraper.py
 ```
 
-2. **Processing Images**
-```python
-python scripts/image_converter.py
-```
+## 📚 Documentation
+- [Frontend Documentation](./docs/frontend/README.md)
+- [Data Collection Documentation](./docs/backend/README.md)
+- [Contributing Guide](./docs/CONTRIBUTING.md)
+- [Code of Conduct](./docs/CODE_OF_CONDUCT.md)
+
+## 🛠️ Tech Stack
+- **Frontend**
+  - React with TypeScript
+  - Vite for build tooling
+  - Tailwind CSS for styling
+  - Sentry for error tracking
+
+- **Data Collection**
+  - Python 3.8+
+  - Selenium WebDriver
+  - Image processing utilities
 
 ## 🤝 Contributing
+We welcome contributions! Please see our [Contributing Guide](./docs/CONTRIBUTING.md) for details.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is for educational purposes only. Please respect Sniffspot's terms of service when using this tool.
+## 📝 License
+This project is for educational purposes only. Please respect Sniffspot's terms of service when using the data collection tools.
