@@ -103,7 +103,7 @@ export function withErrorBoundary<P extends object>(
       this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError(): { hasError: boolean } {
+    static getDerivedStateFromError(error: Error): { hasError: boolean } {
       return { hasError: true };
     }
 

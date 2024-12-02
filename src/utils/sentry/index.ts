@@ -101,8 +101,8 @@ export const startTransaction = (name: string, op: string) => {
 };
 
 // Custom error boundary component with retry capability
-export const withSentryErrorBoundary = (
-  WrappedComponent: React.ComponentType,
+export const withSentryErrorBoundary = <P extends object>(
+  WrappedComponent: React.ComponentType<P>,
   fallbackRender?: (props: { error: Error; resetError: () => void }) => React.ReactNode
 ) => {
   return Sentry.withErrorBoundary(WrappedComponent, {
@@ -118,6 +118,6 @@ export const withSentryErrorBoundary = (
         </button>
       </div>
     )),
-    showDialog: true,
+    showDialog: true
   });
 };
