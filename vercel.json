@@ -25,5 +25,14 @@
     }
   ],
   "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "git": {
+    "deploymentEnabled": {
+      "scripts": false,
+      "utils": false,
+      "data": false,
+      "requirements.txt": false,
+      "*.py": false
+    }
+  }
 }
