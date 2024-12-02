@@ -1,0 +1,40 @@
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
+
+/* Fix map tiles z-index */
+.leaflet-map-pane {
+  z-index: 2;
+}
+
+.leaflet-tile-pane {
+  z-index: 20;
+}
+
+.leaflet-overlay-pane {
+  z-index: 40;
+}
+
+.leaflet-marker-pane {
+  z-index: 60;
+}
+
+.leaflet-popup-pane {
+  z-index: 80;
+}
+
+.leaflet-control {
+  z-index: 100;
+}

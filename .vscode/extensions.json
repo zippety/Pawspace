@@ -1,0 +1,21 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "ms-python.isort",
+        "ms-python.flake8",
+        "eamodio.gitlens",
+        "streetsidesoftware.code-spell-checker",
+        "njpwerner.autodocstring",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "bradlc.vscode-tailwindcss",
+        "dsznajder.es7-react-js-snippets",
+        "christian-kohler.path-intellisense",
+        "formulahendry.auto-rename-tag",
+        "naumovs.color-highlight",
+        "yzhang.markdown-all-in-one"
+    ]
+}

@@ -1,0 +1,72 @@
+{
+  "language_server": {
+    "typescript": {
+      "format": {
+        "semicolons": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "printWidth": 100
+      },
+      "diagnostics": {
+        "enabled": true,
+        "mode": "workspace"
+      },
+      "completion": {
+        "enableDetailedCompletions": true,
+        "includeCompletionsWithSnippetText": true,
+        "enableCallArgumentCompletions": true
+      },
+      "preferences": {
+        "importModuleSpecifierPreference": "relative",
+        "jsxAttributeCompletionStyle": "braces"
+      }
+    },
+    "javascript": {
+      "format": {
+        "semicolons": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "printWidth": 100
+      }
+    }
+  },
+  "editor": {
+    "enableInlineCompletions": true,
+    "enableGhostText": true,
+    "snippets": {
+      "typescript": {
+        "rfc": {
+          "prefix": "rfc",
+          "body": [
+            "import React from 'react';",
+            "",
+            "interface ${1:${TM_FILENAME_BASE}}Props {",
+            "  $2",
+            "}",
+            "",
+            "export function ${1:${TM_FILENAME_BASE}}({ $3 }: ${1:${TM_FILENAME_BASE}}Props) {",
+            "  return (",
+            "    <div>",
+            "      $0",
+            "    </div>",
+            "  );",
+            "}"
+          ],
+          "description": "React Function Component with TypeScript"
+        },
+        "useState": {
+          "prefix": "us",
+          "body": [
+            "const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState${2:<${3:type}>}($4);"
+          ],
+          "description": "React useState Hook"
+        }
+      }
+    }
+  },
+  "telemetry": {
+    "enabled": false
+  }
+}

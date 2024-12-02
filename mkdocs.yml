@@ -1,0 +1,97 @@
+site_name: PawSpace Documentation
+site_description: Documentation for the PawSpace platform
+site_url: https://pawspace.docs
+repo_url: https://github.com/yourusername/pawspace
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    - scheme: default
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: green
+      accent: light green
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - social
+  - tags
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: true
+            show_root_heading: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.emoji
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Quick Start: getting-started/quickstart.md
+    - Installation: getting-started/installation.md
+    - Configuration: getting-started/configuration.md
+  - User Guide:
+    - Overview: user-guide/overview.md
+    - Features: user-guide/features.md
+    - Host Guide: user-guide/host-guide.md
+    - Pet Owner Guide: user-guide/pet-owner-guide.md
+    - FAQ: user-guide/faq.md
+  - Development:
+    - Setup: development/setup.md
+    - Architecture: development/architecture.md
+    - Contributing: development/contributing.md
+    - Code Style: development/style-guide.md
+    - Testing: development/testing.md
+    - Best Practices: development/best-practices.md
+  - Components:
+    - Overview: components/overview.md
+    - Become Host Page: components/become-host-page.md
+    - Directory Page: components/directory-page.md
+    - List Property Page: components/list-property-page.md
+  - API Reference:
+    - Overview: api/overview.md
+    - Authentication: api/authentication.md
+    - Endpoints: api/endpoints.md
+    - Database Schema: api/database-schema.md
+  - Resources:
+    - Path System: resources/path-system.md
+    - Progress Updates: resources/progress-update.md
+    - Future Improvements: resources/future-improvements.md

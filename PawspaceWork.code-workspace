@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.confirmSync": false,
+		"gitlens.codeLens.enabled": true,
+		"tailwindCSS.includeLanguages": {
+			"typescript": "javascript",
+			"typescriptreact": "javascript"
+		},
+		"tailwindCSS.emmetCompletions": true,
+		"autoDocstring.docstringFormat": "google",
+		"autoDocstring.startOnNewLine": true
+	}
+}
