@@ -1,152 +1,77 @@
 # 🐾 PawSpace
 
-## Vision
-PawSpace is revolutionizing pet care spaces by creating an ecosystem where pet owners can find and book various pet-friendly spaces:
+![PawSpace Demo](/public/images/websitedemo.png)
 
-- 🏡 **Yard Rentals**: Like Airbnb for dog parks - rent private yards for your dogs to play
-- 🏕️ **Dog Camps**: Overnight adventures and day camps for dogs
-- 🌳 **Dog Paradise**: A dedicated space combining play areas, wildlife center, and animal sanctuary
-- 😺 **Cat Cafes**: Cozy spaces for cat lovers and adoptable cats
-- 🦮 **Senior Integration**: Programs connecting seniors with animal companionship
+## 🌐 Live Demo
+Visit our live application: [PawSpace on Vercel](https://pawspace-gwdnvx0q4-duanebromfield-gmailcoms-projects.vercel.app)
 
-## 🚀 Current Features
+## Overview
+PawSpace is a platform for finding and booking pet-friendly spaces. Think of it as Airbnb for pets - connecting pet owners with safe, enjoyable spaces for their furry friends.
 
-### Data Collection System
-- 📊 Sniffspot listings data in Ontario
-- 🖼️ Automated image processing
-- 📍 Geolocation mapping
-- 💰 Price analysis
-
-### Web Application
-- 🗺️ Interactive map visualization
-- 📱 Responsive design
-- 📊 Data analytics dashboard
-- 🔍 Advanced search features
+### Core Features
+- 🏡 Private yard rentals for dogs
+- 🗺️ Interactive map with location-based search
+- 📱 Responsive design for all devices
+- 🔍 Advanced filtering and search
+- 💰 Transparent pricing and booking
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- ⚛️ React with TypeScript
-- 🏃‍♂️ Vite for fast builds
-- 🎨 Tailwind CSS
-- 🗺️ Mapbox for visualization
+- React + TypeScript
+- Vite for building
+- Tailwind CSS for styling
+- Mapbox for maps
 
 ### Backend
-- 🐍 Python for data collection
-- 🤖 AI-powered matching system
-- 🗄️ MongoDB database
-- 📊 Analytics engine
+- Node.js + Express
+- MongoDB for database
+- Python for data processing
+- AI-powered recommendations
 
-### AI Components
-- 🧠 HuggingFace models
-- 🔍 Vector search (Pinecone)
-- 📈 Recommendation system
-- 🛡️ Safety analysis
+## 🚀 Getting Started
 
-## 🚀 Quick Start
+1. **Prerequisites**
+   - Node.js (v18+)
+   - npm or yarn
+   - Python 3.8+
 
-### Prerequisites
-- Node.js 16+
-- Python 3.8+
-- MongoDB
-- Git
-
-### Development Setup
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/pawspace.git
-cd pawspace
-
-# Install frontend dependencies
-npm install
-
-# Install Python dependencies
-pip install -r scripts/requirements.txt
-
-# Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys
-
-# Start development server
-npm run dev
-```
-
-### Running Data Collection
-```bash
-# Activate virtual environment
-python -m venv venv
-source venv/bin/activate  # or `venv\Scripts\activate` on Windows
-
-# Run the scraper
-python scripts/sniffspot_scraper.py
-```
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how to get started:
-
-1. Fork the repository
-2. Create your feature branch:
+2. **Installation**
    ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m 'Add amazing feature'
-   ```
-4. Push to your branch:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. Open a Pull Request
+   # Clone the repository
+   git clone https://github.com/yourusername/pawspace.git
+   cd pawspace
 
-### Development Guidelines
-- Write clean, documented code
-- Follow the existing code style
-- Add tests for new features
-- Update documentation
+   # Install dependencies
+   npm install
+
+   # Set up environment variables
+   cp .env.example .env
+   # Edit .env with your credentials
+
+   # Start development server
+   npm run dev
+   ```
+
+3. **Environment Variables**
+   See `.env.example` for required variables
 
 ## 📚 Documentation
-- [Setup Guide](./docs/setup.md)
-- [API Documentation](./docs/api.md)
-- [Contributing Guide](./docs/CONTRIBUTING.md)
-- [AI Integration Guide](./docs/ai.md)
+Comprehensive documentation is available in the `/docs` directory:
 
-## 🗺️ Roadmap
+- 🔧 [Setup Guide](docs/guides/setup.md)
+- 📖 [API Documentation](docs/technical/API.md)
+- 🏗️ [Architecture](docs/technical/ARCHITECTURE.md)
+- 🚀 [Deployment Guide](docs/guides/DEPLOYMENT.md)
+- 📈 [Progress Updates](docs/project/PROGRESS.md)
 
-### Phase 1: Foundation
-- [x] Basic data collection
-- [x] Web visualization
-- [ ] User authentication
-- [ ] Basic booking system
-
-### Phase 2: Space Management
-- [ ] Yard space listings
-- [ ] Booking management
-- [ ] Payment integration
-- [ ] Review system
-
-### Phase 3: Camp Features
-- [ ] Camp space management
-- [ ] Activity scheduling
-- [ ] Staff management
-- [ ] Weather integration
-
-### Phase 4: Paradise & Sanctuary
-- [ ] Multi-space management
-- [ ] Animal tracking
-- [ ] Veterinary integration
-- [ ] Senior programs
-
-## 🐛 Known Issues
-1. Data collection needs rate limiting
-2. Map visualization performance with large datasets
-3. Mobile responsiveness improvements needed
-
-## 🤝 Support
-- 📧 Email: support@pawspace.com
-- 💬 Discord: [Join our community](https://discord.gg/pawspace)
-- 🐦 Twitter: [@pawspace](https://twitter.com/pawspace)
+## 🤝 Contributing
+We welcome contributions! Please see our [Contributing Guide](docs/guides/CONTRIBUTING.md) and [Code of Conduct](docs/project/CODE_OF_CONDUCT.md).
 
 ## 📝 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+- Sniffspot for inspiration
+- Our amazing contributors
+- The pet owner community

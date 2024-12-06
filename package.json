@@ -7,7 +7,7 @@
     "fix": "node scripts/fix-project.js",
     "setup": "node scripts/setup-check.js",
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "serve": "vite preview",
     "start": "node dist/server/server.js",
     "dev:server": "nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/server.ts",

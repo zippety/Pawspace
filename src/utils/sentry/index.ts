@@ -10,28 +10,21 @@ interface UserContext {
 }
 
 export function initSentry(): void {
-  Sentry.init({
-    dsn: process.env.VITE_SENTRY_DSN,
-    integrations: [
-      new BrowserTracing({
-        tracePropagationTargets: ['localhost', /^https:\/\/pawspace\.vercel\.app/],
-      }),
-      new Replay({
-        maskAllText: true,
-        blockAllMedia: true,
-      }),
-    ],
-    tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
-    environment: process.env.NODE_ENV,
-    beforeSend(event) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.log('Sentry Event:', event);
-      }
-      return event;
-    },
-  });
+  if (process.env.NODE_ENV === 'production') {
+    Sentry.init({
+      dsn: import.meta.env.VITE_SENTRY_DSN,
+      integrations: [
+        new BrowserTracing(),
+        new Replay({
+          maskAllText: true,
+          blockAllMedia: true,
+        }),
+      ],
+      tracesSampleRate: 1.0,
+      replaysSessionSampleRate: 0.1,
+      replaysOnErrorSampleRate: 1.0,
+    });
+  }
 }
 
 export function setUserContext(user: UserContext | null): void {
@@ -46,48 +39,32 @@ export function setUserContext(user: UserContext | null): void {
   }
 }
 
-export function reportError(
-  error: Error,
-  context?: Record<string, any>,
-  level: Sentry.SeverityLevel = 'error'
-): void {
-  Sentry.withScope((scope) => {
-    if (context) {
-      Object.entries(context).forEach(([key, value]) => {
-        scope.setExtra(key, value);
-      });
-    }
-
-    scope.setLevel(level);
-    Sentry.captureException(error);
-  });
-
-  if (process.env.NODE_ENV !== 'production') {
-    console.error('Error:', error);
-    if (context) {
-      console.error('Context:', context);
-    }
-  }
+interface ErrorBoundaryProps {
+  error: Error;
+  resetError: () => void;
 }
+
+const DefaultErrorFallback = ({ error, resetError }: ErrorBoundaryProps): JSX.Element => (
+  <div className="error-boundary p-4 border border-red-300 rounded-md bg-red-50">
+    <h2 className="text-lg font-semibold text-red-800">Something went wrong</h2>
+    <p className="mt-2 text-red-600">{error?.message || 'An unexpected error occurred'}</p>
+    <button
+      onClick={resetError}
+      className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+    >
+      Try again
+    </button>
+  </div>
+);
 
 // Custom error boundary component with retry capability
 export function withSentryErrorBoundary<P extends object>(
   WrappedComponent: React.ComponentType<P>,
-  fallbackRender?: (props: { error: Error; resetError: () => void }) => React.ReactNode
+  fallbackRender?: React.ComponentType<ErrorBoundaryProps>
 ): React.ComponentType<P> {
+  const FallbackComponent = fallbackRender || DefaultErrorFallback;
   return Sentry.withErrorBoundary(WrappedComponent, {
-    fallback: fallbackRender || (({ error, resetError }) => (
-      <div className="error-boundary p-4 border border-red-300 rounded-md bg-red-50">
-        <h2 className="text-lg font-semibold text-red-800">Something went wrong</h2>
-        <p className="mt-2 text-red-600">{error?.message || 'An unexpected error occurred'}</p>
-        <button
-          onClick={resetError}
-          className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          Try again
-        </button>
-      </div>
-    )),
+    fallback: (props: ErrorBoundaryProps) => <FallbackComponent {...props} />,
     showDialog: true,
   });
 }

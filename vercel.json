@@ -12,27 +12,16 @@
   ],
   "routes": [
     {
-      "src": "^/assets/(.*)",
+      "src": "/assets/(.*)",
       "dest": "/assets/$1"
     },
     {
-      "src": "^/api/(.*)",
+      "src": "/api/(.*)",
       "dest": "/api/$1"
     },
     {
-      "src": ".*",
+      "src": "/(.*)",
       "dest": "/index.html"
     }
-  ],
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./",
-  "installCommand": "npm install",
-  "git": {
-    "deploymentEnabled": {
-      "scripts": false,
-      "utils": false,
-      "data": false,
-      "requirements.txt": false,
-      "*.py": false
-    }
-  }
+  ]
 }

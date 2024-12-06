@@ -1,14 +1,14 @@
 import { captureException } from '@sentry/react';
 import React from 'react';
 
-export interface ErrorContext {
+interface ErrorContext {
   component: string;
   action: string;
   userId?: string;
   metadata?: Record<string, any>;
 }
 
-export class ErrorHandler {
+class ErrorHandler {
   private static instance: ErrorHandler;
   private errorLog: Array<{
     timestamp: Date;
@@ -31,12 +31,11 @@ export class ErrorHandler {
   }
 
   private logError(error: Error, context: ErrorContext): void {
-    const errorEntry = {
+    this.errorLog.push({
       timestamp: new Date(),
       error,
       context,
-    };
-    this.errorLog.push(errorEntry);
+    });
     console.error('Error:', error);
     console.error('Context:', context);
   }
@@ -71,18 +70,26 @@ export class ErrorHandler {
   }
 }
 
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+interface ErrorBoundaryProps {
+  children?: React.ReactNode;
+}
+
 // Error boundary component
 export function withErrorBoundary<P extends object>(
   WrappedComponent: React.ComponentType<P>,
   componentName: string
 ): React.ComponentType<P> {
-  return class ErrorBoundary extends React.Component<P, { hasError: boolean }> {
-    constructor(props: P) {
+  return class ErrorBoundary extends React.Component<P & ErrorBoundaryProps, ErrorBoundaryState> {
+    constructor(props: P & ErrorBoundaryProps) {
       super(props);
       this.state = { hasError: false };
     }
 
-    static getDerivedStateFromError(): { hasError: boolean } {
+    static getDerivedStateFromError(): ErrorBoundaryState {
       return { hasError: true };
     }
 
@@ -104,21 +111,8 @@ export function withErrorBoundary<P extends object>(
         );
       }
 
-      return <WrappedComponent {...this.props} />;
+      return <WrappedComponent {...(this.props as P)} />;
     }
-  };
-}
-
-// Hook for functional components
-export function useErrorHandler(component: string) {
-  return {
-    handleError: (error: Error, action: string, metadata?: Record<string, any>) => {
-      ErrorHandler.getInstance().handleError(error, {
-        component,
-        action,
-        metadata,
-      });
-    },
   };
 }
 
@@ -130,7 +124,9 @@ export async function withErrorHandling<T>(
   try {
     return await operation();
   } catch (error) {
-    ErrorHandler.getInstance().handleError(error as Error, context);
+    ErrorHandler.getInstance().handleError(error instanceof Error ? error : new Error(String(error)), context);
     throw error;
   }
 }
+
+export default ErrorHandler;

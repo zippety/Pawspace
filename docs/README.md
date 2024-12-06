@@ -1,74 +1,34 @@
 # PawSpace Documentation
 
-This directory contains both API documentation (Sphinx) and user documentation (MkDocs).
+Welcome to the PawSpace documentation! This directory contains comprehensive documentation for developers, users, and contributors.
 
-## Structure
+## Documentation Structure
 
 ```
 docs/
-├── sphinx/              # API documentation (Sphinx)
-│   ├── api/            # API reference docs
-│   ├── _static/        # Static files (CSS, images)
-│   └── conf.py         # Sphinx configuration
-├── user-guide/         # User documentation (MkDocs)
-├── requirements.txt    # Documentation dependencies
-└── build_docs.py       # Build script
+├── guides/            # Developer and user guides
+│   ├── CONTRIBUTING.md     # How to contribute
+│   ├── DEPLOYMENT.md      # Deployment procedures
+│   ├── best-practices.md  # Coding standards
+│   └── setup.md          # Development setup
+├── project/           # Project management
+│   ├── CODE_OF_CONDUCT.md # Community guidelines
+│   └── PROGRESS.md       # Development progress
+└── technical/         # Technical documentation
+    ├── API.md            # API specifications
+    ├── ARCHITECTURE.md   # System architecture
+    └── COMPONENTS.md     # Component documentation
 ```
 
-## Setup
+## Quick Links
 
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Build documentation:
-   ```bash
-   python build_docs.py
-   ```
-
-## Development
-
-### API Documentation (Sphinx)
-
-- Edit files in `sphinx/api/`
-- Build: `cd sphinx && make html`
-- View: Open `sphinx/_build/html/index.html`
-
-### User Guide (MkDocs)
-
-- Edit files in `docs/`
-- Preview: `mkdocs serve`
-- Build: `mkdocs build`
-
-## Automated Deployment
-
-Documentation is automatically built and deployed to GitHub Pages when:
-1. Changes are pushed to the main branch
-2. Pull requests are created/updated
-3. Manual trigger via GitHub Actions
-
-The deployed documentation will be available at: `https://[username].github.io/pawspace/`
-
-## Writing Guidelines
-
-1. **API Documentation**
-   - Use clear, consistent terminology
-   - Include request/response examples
-   - Document all parameters
-   - Explain error scenarios
-
-2. **User Guide**
-   - Write in a clear, friendly tone
-   - Include screenshots where helpful
-   - Provide step-by-step instructions
-   - Keep content up-to-date
+- [Setup Guide](guides/setup.md) - Get started with development
+- [Deployment Guide](guides/DEPLOYMENT.md) - Deploy PawSpace
+- [API Documentation](technical/API.md) - API reference
+- [Architecture](technical/ARCHITECTURE.md) - System design
+- [Components](technical/COMPONENTS.md) - UI components
+- [Progress Updates](project/PROGRESS.md) - Development status
 
 ## Contributing
 
-1. Create a new branch
-2. Make your changes
-3. Build documentation locally to verify
-4. Create a pull request
-5. Wait for the documentation preview
-6. Request review
+We welcome contributions! Please read our [Contributing Guide](guides/CONTRIBUTING.md) and [Code of Conduct](project/CODE_OF_CONDUCT.md) before getting started.
