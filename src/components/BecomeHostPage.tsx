@@ -9,11 +9,11 @@ export const BecomeHostPage: React.FC = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/hero-dogs.jpg"
-            alt="Person with dog in private park"
-            className="w-full h-full object-cover"
+            src="/dogs-playing.jpg"
+            alt="Two happy dogs playing together in a sunny backyard"
+            className="w-full h-full object-cover object-center brightness-90"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
         </div>
 
         {/* Content Overlay */}

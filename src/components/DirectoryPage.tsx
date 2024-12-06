@@ -1,25 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../styles/leaflet.css';
 import { defaultIcon } from '../utils/leaflet-setup';
-import '../utils/leaflet-setup';
-
-// interface DogPark {
-//   id: number;
-//   title: string;
-//   location: string;
-//   price: number;
-//   size: string;
-//   distance: string;
-//   rating: number;
-//   reviews: number;
-//   features: string[];
-//   images: string[];
-//   position: [number, number];
-//   totalImages: number;
-//   isTopSpot: boolean;
-// }
 
 interface DogPark {
   id: number;
@@ -73,6 +57,17 @@ export const DirectoryPage: React.FC = () => {
     }
   ];
 
+  useEffect(() => {
+    console.log('DirectoryPage mounted');
+    // Fix Leaflet's default icon path issues
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumb */}
@@ -108,11 +103,11 @@ export const DirectoryPage: React.FC = () => {
           </div>
 
           {/* Map */}
-          <div className="flex-1 relative">
+          <div className="flex-1 relative" style={{ height: 'calc(100vh - 200px)' }}>
             <MapContainer
               center={[43.6532, -79.3832]}
               zoom={10}
-              className="h-full w-full absolute"
+              style={{ height: '100%', width: '100%' }}
               scrollWheelZoom={true}
             >
               <TileLayer
